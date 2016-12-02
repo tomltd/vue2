@@ -3,19 +3,23 @@
     <head>
         <meta charset="utf-8">
         <title>Vue 2 laracast</title>
+        <style>
+            .is-loading{
+                background: red;
+            }
+
+            .colour-blue {
+                color: blue;
+            }
+        </style>
     </head>
     <body>
 
         <div id="root">
 
-            <ul>
-                <li v-for="name in names" v-text="name"></li>
-            </ul>
+            <button v-bind:title="title">Hover Over Me</button>
 
-            <input type="text" v-model="newName">
-
-            <button v-on:click="addName">Add Name</button>
-
+            <button :class="{ 'is-loading': isLoading}" v-on:click="toggleClass">Loading</button>
         </div>
 
 
@@ -27,21 +31,16 @@
                 el: '#root',
 
                 data: {
-                    newName: '',
-                    names: ['joe', 'Mary,', 'Jane', 'jack']
+                    title: 'Now the title is being set through javascript',
+                    className: 'colour-red',
+                    isLoading: false
 
                 },
-
 
                 methods: {
-                    addName() {
-                        this.names.push(this.newName);
-                        this.newName = '';
+                    toggleClass() {
+                        this.isLoading = true;
                     }
-                },
-
-                mounted() {
-                    console.log('Loaded');
                 }
             })
 
